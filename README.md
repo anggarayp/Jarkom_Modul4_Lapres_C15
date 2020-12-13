@@ -25,7 +25,7 @@ Selanjutnya hitung pembagian IP berdasarkan **tree** berikut :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tree%20c15%20vlsm.png)
 
-
+Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 **SURABAYA**
 ```
 192.168.0.8/30 via 192.168.0.10
