@@ -58,7 +58,7 @@ Untuk interface FastEthernet0/0 tersambung dengan Router Batu (Subnet A6) sehing
 
 Untuk interface FastEthernet1/1 tersambung dengan Router Pasuruan (Subnet A9) sehingga dimasukkan IP dan Netmask dari Router Pasuruan seperti berikut:
 
-![image](https://user-images.githubusercontent.com/61231385/102013969-f7118f80-3d85-11eb-8c6a-5a0c284830ac.png)
+![image](https://user-images.githubusercontent.com/61231385/102014600-6046d200-3d89-11eb-8e98-1fb2c189f60d.png)
 
 Untuk interface FastEthernet0/1 tersambung dengan Server Mojokerto sehingga dimasukkan IP dan Netmask dari Server Mojokerto seperti berikut:
 
@@ -167,11 +167,11 @@ Perhitungan pada teknik Classless Inter Domain Routing juga didasarkan pada juml
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tabel%20cidr.png)
 
-Lalu hitung pembagian IP dengan **tree** berdasarkan penggabungan subnet yang telah dilakukan :
+3. Lalu hitung pembagian IP dengan **tree** berdasarkan penggabungan subnet yang telah dilakukan :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tree%20cidr%20new%20new.png)
 
-3. Buat file ```topologi.sh``` dan jalankan file tersebut dengan perintah ```bash topologi.sh```.
+4. Buat file ```topologi.sh``` dan jalankan file tersebut dengan perintah ```bash topologi.sh```.
 
 ```
 # Switch
@@ -217,7 +217,7 @@ xterm -T LUMAJANG -e linux ubd0=LUMAJANG,jarkom umid=LUMAJANG eth0=daemon,,,swit
 xterm -T TULUNGAGUNG -e linux ubd0=TULUNGAGUNG,jarkom umid=TULUNGAGUNG eth0=daemon,,,switch20 mem=64M &
 ```
 
-4. Lakukan setting interface pada setiap UML dengan ```nano/etc/network/interfaces```. Lalu restart dengan ```service networking restart```. Jangan lupa uncomment ```net.ipv4.ip_forward=1``` pada ```nano /etc/sysctl.conf``` di semua router.
+5. Lakukan setting interface pada setiap UML dengan ```nano/etc/network/interfaces```. Lalu restart dengan ```service networking restart```. Jangan lupa uncomment ```net.ipv4.ip_forward=1``` pada ```nano /etc/sysctl.conf``` di semua router.
 
 **SURABAYA**
 
@@ -500,7 +500,7 @@ netmask 255.255.252.0
 gateway 192.168.144.1
 ```
 
-5. Setelah selesai melakukan setting interface, jalankan ```iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16``` pada uml SURABAYA agar terhubung ke internet. Lalu, lakukan routing dibawah ini dengan cara ```nano route.sh```. Ketika selesai menambahkan route, jalankan routing dengan ```bash route.sh```.
+6. Setelah selesai melakukan setting interface, jalankan ```iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16``` pada uml SURABAYA agar terhubung ke internet. Lalu, lakukan routing dibawah ini dengan cara ```nano route.sh```. Ketika selesai menambahkan route, jalankan routing dengan ```bash route.sh```.
 
 **SURABAYA**
 
