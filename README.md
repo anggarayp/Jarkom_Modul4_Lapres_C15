@@ -60,6 +60,10 @@ Untuk interface FastEthernet1/1 tersambung dengan Router Pasuruan (Subnet A9) se
 
 ![image](https://user-images.githubusercontent.com/61231385/102013969-f7118f80-3d85-11eb-8c6a-5a0c284830ac.png)
 
+Untuk interface FastEthernet0/1 tersambung dengan Server Mojokerto sehingga dimasukkan IP dan Netmask dari Server Mojokerto seperti berikut:
+
+![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/sby%20mojo.jpg)
+
 4. Lakukan pada tahap 3 pada setiap device yang ada di topologi
 
 5. Melakukan konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
