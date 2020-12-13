@@ -13,7 +13,7 @@ Pada Topologi CPT tersebut dibagi alamat IP-nya dengan metode Classful :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/Soal%20Shift%20C15%201.png)
 
-### Metode VLSM
+### A. Metode VLSM
 
 Metode Variable Length Subnet Masking kami gunakan untuk pengerjaan yang di CPT.
 
@@ -141,7 +141,7 @@ Untuk interface FastEthernet1/1 tersambung dengan Router Pasuruan (Subnet A9) se
 0.0.0.0/0 via 192.168.0.13
 ```
 
-### Metode CIDR
+### B. Metode CIDR
 
 Perhitungan pada teknik Classless Inter Domain Routing juga didasarkan pada jumlah komputer/ host yang ada di dalam subnet. Kami menggunakan teknik ini untuk pengerjaan yang di UML.
 
