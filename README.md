@@ -17,16 +17,48 @@ Pada Topologi CPT tersebut dibagi alamat IP-nya dengan metode Classful :
 
 Metode Variable Length Subnet Masking kami gunakan untuk pengerjaan yang di CPT.
 
-Menentukan jumlah alamat IP yang dibutuhkan oleh tiap subnet dan lakukan labelling netmask berdasarkan jumlah IP yang dibutuhkan. Berikut merupakan hasilnya dalam bentuk **tabel** :
+1. Menentukan jumlah alamat IP yang dibutuhkan oleh tiap subnet dan lakukan labelling netmask berdasarkan jumlah IP yang dibutuhkan. Berikut merupakan hasilnya dalam bentuk **tabel** :
 
-![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tabel%20vlsm.png)
+| Subnet        | Kebutuhan IP   | Length  |
+| ------------- |:--------------:| -------:|
+| A1            |    13          |  /28    |
+| A2            |   721          |  /22    |
+| A3            |   251          |  /22    |
+| A4            |   521          |  /22    |
+| A5            |   501          |  /22    |
+| A6            |     2          |  /22    |
+| A7            |     2          |  /22    |
+| A8            |  1001          |  /22    |
+| A9            |     2          |  /22    |
+| A10           |     2          |  /22    |
+| A11           |   101          |  /22    |
+| A12           |   701          |  /22    |
+| A13           |  2021          |  /21    |
+| Jumlah        |  5839          |  /19    |
 
-Selanjutnya hitung pembagian IP berdasarkan **tree** berikut :
+2. Selanjutnya hitung pembagian IP berdasarkan **tree** berikut :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tree%20c15%20vlsm.png)
 
-Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
+3. Melakukan konfigurasi interfaces pada setiap device sesuai pembagian subnet pada pohon perhitungan.
+
+![image](https://user-images.githubusercontent.com/61231385/102013930-a863f580-3d85-11eb-9217-cd3e0e592f35.png)
+
+![image](https://user-images.githubusercontent.com/61231385/102013934-af8b0380-3d85-11eb-9e7a-b5f65fc6e86c.png)
+
+Contohnya yaitu pada device Surabaya, dapat kita atur interfacenya pada menu Config > Interface > [Nama Interface]
+Device Router Surabaya terhubung dengan 5 device lain yaitu Cloud, Server Mojokerto, Router Batu (Subnet A7), Router Pasuruan (Subnet A9) dan Client Sampang (Subnet A8), maka dari itu diatur interface pada Surabaya sesuai dengan nama interface yang tersambung dengan device lain.
+
+![image](https://user-images.githubusercontent.com/61231385/102013962-e8c37380-3d85-11eb-9ee3-88554c119a60.png)
+
+![image](https://user-images.githubusercontent.com/61231385/102013942-c3366a00-3d85-11eb-9067-199b913e219e.png)
+
+![image](https://user-images.githubusercontent.com/61231385/102013969-f7118f80-3d85-11eb-8c6a-5a0c284830ac.png)
+
+4. Melakukan konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
+
 **SURABAYA**
+
 ```
 192.168.0.8/30 via 192.168.0.10
 192.168.24.0/22 via 192.168.0.10
@@ -44,6 +76,7 @@ Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 ```
 
 **BATU**
+
 ```
 0.0.0.0/0 via 192.168.0.1
 192.168.2.0/23 via 192.168.2.3
@@ -57,12 +90,14 @@ Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 ```
 
 **MADIUN**
+
 ```
 0.0.0.0/0 via 192.168.2.1
 192.168.0.16/28 via 192.168.2.1
 ```
 
 **KEDIRI**
+
 ```
 10.151.77.128/30 via 10.151.77.130
 0.0.0.0/0 via 192.168.0.5
@@ -71,12 +106,14 @@ Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 ```
 
 **BLITAR**
+
 ```
 0.0.0.0/0 via 192.168.1.1
 192.168.4.0/22 via 192.168.1.1
 ```
 
 **PASURUAN**
+
 ```
 192.168.24.0/22 via 192.168.24.2
 192.168.8.0/21 via 192.168.8.3
@@ -89,6 +126,7 @@ Konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 ```
 
 **PROBOLINGGO**
+
 ```
 192.168.0.128/25 via 192.168.0.130
 192.168.8.0/21 via 192.168.8.3
