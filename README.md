@@ -43,19 +43,26 @@ Metode Variable Length Subnet Masking kami gunakan untuk pengerjaan yang di CPT.
 3. Melakukan konfigurasi interfaces pada setiap device sesuai pembagian subnet pada pohon perhitungan.
 
 ![image](https://user-images.githubusercontent.com/61231385/102013930-a863f580-3d85-11eb-9217-cd3e0e592f35.png)
-
 ![image](https://user-images.githubusercontent.com/61231385/102013934-af8b0380-3d85-11eb-9e7a-b5f65fc6e86c.png)
 
 Contohnya yaitu pada device Surabaya, dapat kita atur interfacenya pada menu Config > Interface > [Nama Interface]
-Device Router Surabaya terhubung dengan 5 device lain yaitu Cloud, Server Mojokerto, Router Batu (Subnet A7), Router Pasuruan (Subnet A9) dan Client Sampang (Subnet A8), maka dari itu diatur interface pada Surabaya sesuai dengan nama interface yang tersambung dengan device lain.
+Device Router Surabaya terhubung dengan 5 device lain yaitu Cloud, Server Mojokerto, Router Batu (Subnet A6), Router Pasuruan (Subnet A9) dan Client Sampang (Subnet A8), maka dari itu diatur interface pada Surabaya sesuai dengan nama interface yang tersambung dengan device lain.
+
+Untuk interface FastEthernet1/0 tersambung dengan Client Sampang (Subnet A8) sehingga dimasukkan IP dan Netmask dari Client Sampang seperti berikut:
 
 ![image](https://user-images.githubusercontent.com/61231385/102013962-e8c37380-3d85-11eb-9ee3-88554c119a60.png)
 
+Untuk interface FastEthernet0/0 tersambung dengan Router Batu (Subnet A6) sehingga dimasukkan IP dan Netmask dari Router Batu seperti berikut:
+
 ![image](https://user-images.githubusercontent.com/61231385/102013942-c3366a00-3d85-11eb-9067-199b913e219e.png)
+
+Untuk interface FastEthernet1/1 tersambung dengan Router Pasuruan (Subnet A9) sehingga dimasukkan IP dan Netmask dari Router Pasuruan seperti berikut:
 
 ![image](https://user-images.githubusercontent.com/61231385/102013969-f7118f80-3d85-11eb-8c6a-5a0c284830ac.png)
 
-4. Melakukan konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
+4. Lakukan pada tahap 3 pada setiap device yang ada di topologi
+
+5. Melakukan konfigurasi static di tiap router agar menghasilkan seperti dibawah ini:
 
 **SURABAYA**
 
@@ -138,7 +145,7 @@ Device Router Surabaya terhubung dengan 5 device lain yaitu Cloud, Server Mojoke
 
 Perhitungan pada teknik Classless Inter Domain Routing juga didasarkan pada jumlah komputer/ host yang ada di dalam subnet. Kami menggunakan teknik ini untuk pengerjaan yang di UML.
 
-Melakukan **labelling netmask** terhadap masing-masing subnet yang tahap-tahapnya sebagai berikut :
+1. Melakukan **labelling netmask** terhadap masing-masing subnet yang tahap-tahapnya sebagai berikut :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/a-b.png)
 
@@ -152,7 +159,7 @@ Melakukan **labelling netmask** terhadap masing-masing subnet yang tahap-tahapny
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/g.png)
 
-Dari proses penggabungan yang telah dilakukan, didapatkan sebuah subnet besar dengan netmask /16. Berikut pembagian NID serta lengthnya dalam bentuk **tabel** :
+2. Dari proses penggabungan yang telah dilakukan, didapatkan sebuah subnet besar dengan netmask /16. Berikut pembagian NID serta lengthnya dalam bentuk **tabel** :
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tabel%20cidr.png)
 
@@ -160,7 +167,8 @@ Lalu hitung pembagian IP dengan **tree** berdasarkan penggabungan subnet yang te
 
 ![image](https://github.com/anggarayp/Jarkom_Modul4_Lapres_C15/blob/main/Screenshots/tree%20cidr%20new%20new.png)
 
-Buat file ```topologi.sh``` dan jalankan file tersebut dengan perintah ```bash topologi.sh```.
+3. Buat file ```topologi.sh``` dan jalankan file tersebut dengan perintah ```bash topologi.sh```.
+
 ```
 # Switch
 uml_switch -unix switch1 > /dev/null < /dev/null &
@@ -205,9 +213,10 @@ xterm -T LUMAJANG -e linux ubd0=LUMAJANG,jarkom umid=LUMAJANG eth0=daemon,,,swit
 xterm -T TULUNGAGUNG -e linux ubd0=TULUNGAGUNG,jarkom umid=TULUNGAGUNG eth0=daemon,,,switch20 mem=64M &
 ```
 
-Lakukan setting interface pada setiap UML dengan ```nano/etc/network/interfaces```. Lalu restart dengan ```service networking restart```. Jangan lupa uncomment ```net.ipv4.ip_forward=1``` pada ```nano /etc/sysctl.conf``` di semua router.
+4. Lakukan setting interface pada setiap UML dengan ```nano/etc/network/interfaces```. Lalu restart dengan ```service networking restart```. Jangan lupa uncomment ```net.ipv4.ip_forward=1``` pada ```nano /etc/sysctl.conf``` di semua router.
 
 **SURABAYA**
+
 ```
 auto lo
 iface lo inet loopback
@@ -235,6 +244,7 @@ netmask 255.255.255.252
 ```
 
 **PASURUAN**
+
 ```
 auto lo
 iface lo inet loopback
@@ -253,6 +263,7 @@ netmask 255.255.252.0
 ```
 
 **PROBOLINGGO**
+
 ```
 auto lo
 iface lo inet loopback
@@ -271,6 +282,7 @@ netmask 255.255.248.0
 ```
 
 **BATU**
+
 ```auto lo
 iface lo inet loopback
 auto eth0
@@ -291,8 +303,8 @@ address 192.168.18.1
 netmask 255.255.255.240
 ```
 
-
 **MADIUN**
+
 ```
 auto lo
 iface lo inet loopback
@@ -306,8 +318,8 @@ address 192.168.16.1
 netmask 255.255.254.0
 ```
 
-
 **KEDIRI**
+
 ```
 auto lo
 iface lo inet loopback
@@ -325,8 +337,8 @@ address 10.151.77.130
 netmask 255.255.255.252
 ```
 
-
 **BLITAR**
+
 ```
 auto lo
 iface lo inet loopback
@@ -341,6 +353,7 @@ netmask 255.255.252.0
 ```
 
 **MALANG**
+
 ```
 auto lo
 iface lo inet loopback
@@ -352,6 +365,7 @@ gateway 10.151.77.129
 ```
 
 **MOJOKERTO**
+
 ```
 auto lo
 iface lo inet loopback
@@ -363,6 +377,7 @@ gateway 10.151.77.133
 ```
 
 **SAMPANG**
+
 ```
 auto lo
 iface lo inet loopback
@@ -373,8 +388,8 @@ netmask 255.255.252.0
 gateway 192.168.64.1
 ```
 
-
 **SIDOARJO**
+
 ```
 auto lo
 iface lo inet loopback
@@ -386,6 +401,7 @@ gateway 192.168.160.1
 ```
 
 **BANYUWANGI**
+
 ```
 auto lo
 iface lo inet loopback
@@ -397,6 +413,7 @@ gateway 192.168.128.1
 ```
 
 **JEMBER**
+
 ```
 auto lo
 iface lo inet loopback
@@ -408,6 +425,7 @@ gateway 192.168.128.1
 ```
 
 **BONDOWOSO**
+
 ```
 auto lo
 iface lo inet loopback
@@ -419,6 +437,7 @@ gateway 192.168.136.1
 ```
 
 **JOMBANG**
+
 ```
 auto lo
 iface lo inet loopback
@@ -430,6 +449,7 @@ gateway 192.168.18.1
 ```
 
 **BOJONEGORO**
+
 ```
 auto lo
 iface lo inet loopback
@@ -441,6 +461,7 @@ gateway 192.168.16.1
 ```
 
 **NGANJUK**
+
 ```
 auto lo
 iface lo inet loopback
@@ -453,6 +474,7 @@ gateway 192.168.20.1
 
 
 **LUMAJANG**
+
 ```
 auto lo
 iface lo inet loopback
@@ -464,6 +486,7 @@ gateway 192.168.4.1
 ```
 
 **TULUNGAGUNG**
+
 ```
 auto lo
 iface lo inet loopback
@@ -474,10 +497,11 @@ netmask 255.255.252.0
 gateway 192.168.144.1
 ```
 
-Setelah selesai melakukan setting interface, jalankan ```iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16``` pada uml SURABAYA agar terhubung ke internet. Lalu, lakukan routing dibawah ini dengan cara ```nano route.sh```. Ketika selesai menambahkan route, jalankan routing dengan ```bash route.sh```.
+5. Setelah selesai melakukan setting interface, jalankan ```iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16``` pada uml SURABAYA agar terhubung ke internet. Lalu, lakukan routing dibawah ini dengan cara ```nano route.sh```. Ketika selesai menambahkan route, jalankan routing dengan ```bash route.sh```.
 
 
 **SURABAYA**
+
 ```
 route add -net 192.168.144.0 netmask 255.255.255.252 gw 192.168.192.2 
 route add -net 192.168.136.0 netmask 255.255.255.128 gw 192.168.192.2
@@ -494,6 +518,7 @@ route add -net 10.151.77.128 netmask 255.255.255.252 gw 192.168.32.2
 ```
 
 **BATU**
+
 ```
 route add -net 192.168.4.0 netmask 255.255.255.0 gw 192.168.8.2
 route add -net 192.168.0.0 netmask 255.255.252.0 gw 192.168.8.2
@@ -502,11 +527,13 @@ route add -net 192.168.16.0 netmask 255.255.255.240 gw 192.168.18.2
 ```
 
 **KEDIRI**
+
 ```
 route add -net 192.168.0.0 netmask 255.255.252.0 gw 192.168.4.2
 ```
 
 **PASURUAN **
+
 ```
 route add -net 192.168.128.0 netmask 255.255.248.0 gw 192.168.144.2
 route add -net 192.168.136.0 netmask 255.255.255.128 gw 192.168.144.2
